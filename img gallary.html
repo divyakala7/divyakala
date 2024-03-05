@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="ImageGalleryApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Interactive Image Gallery</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 20px auto;
+      padding: 20px;
+      background-color: #fff;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+      grid-gap: 10px;
+    }
+
+    .image {
+      border-radius: 5px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .image img {
+      width: 100%;
+      height: auto;
+    }
+
+    .details {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background-color: rgba(255, 255, 255, 0.9);
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+      z-index: 9999;
+    }
+
+    .details.active {
+      display: block;
+    }
+
+    .details h2 {
+      margin-top: 0;
+    }
+
+    .details p {
+      margin-bottom: 0;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body ng-controller="GalleryController">
+  <div class="container">
+    <h1>Interactive Image Gallery</h1>
+    <div class="gallery">
+      <div class="image" ng-repeat="image in images" ng-click="showDetails($index)">
+        <img ng-src="{{ image.src }}" alt="{{ image.title }}">
+      </div>
+    </div>
+    <div class="details" ng-class="{ active: showModal }">
+      <span class="close-btn" ng-click="hideDetails()">&#10006;</span>
+      <h2>{{ selectedImage.title }}</h2>
+      <img ng-src="{{ selectedImage.src }}" alt="{{ selectedImage.title }}">
+      <p>{{ selectedImage.description }}</p>
+    </div>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script>
+    angular.module('ImageGalleryApp', [])
+      .controller('GalleryController', function($scope) {
+        $scope.images = [
+          { src:"https://cf.ltkcdn.net/feng-shui/images/std/291786-800x533-symbolism-koi-fish-feng-shui.jpg", title: 'Image 1', description: 'Description for Image 1'  },         { src:"https://img.staticmb.com/mbcontent/images/crop/uploads/2022/12/Feng-shui-fish-acquarium_0_1200.jpg", title: 'Image 2', description: 'Description for Image 2' },
+          { src: "https://www.aquariadise.com/wp-content/uploads/2022/07/Most-Beautiful-Fish-1024x684.webp", title: 'Image 3', description: 'Description for Image 3' },
+          { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShzze_7p7CSiTBppyHvWchn8vF6FM0t7FMuA&usqp=CAU", title: 'Image 4', description: 'Description for Image 4' }
+        ];
+
+        $scope.showModal = false;
+        $scope.selectedImage = {};
+
+        $scope.showDetails = function(index) {
+          $scope.selectedImage = $scope.images[index];
+          $scope.showModal = true;
+        };
+
+        $scope.hideDetails = function() {
+          $scope.showModal = false;
+        };
+      });
+  </script>
+</body>
+</html>
