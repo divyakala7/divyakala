@@ -5,6 +5,7 @@
   <title>Interactive Image Gallery</title>
   <style>
     body {
+
       font-family: Arial, sans-serif;
       margin: 0;
       padding: 0;
@@ -91,9 +92,10 @@
     angular.module('ImageGalleryApp', [])
       .controller('GalleryController', function($scope) {
         $scope.images = [
-          { src:"https://cf.ltkcdn.net/feng-shui/images/std/291786-800x533-symbolism-koi-fish-feng-shui.jpg", title: 'Image 1', description: 'Description for Image 1'  },         { src:"https://img.staticmb.com/mbcontent/images/crop/uploads/2022/12/Feng-shui-fish-acquarium_0_1200.jpg", title: 'Image 2', description: 'Description for Image 2' },
-          { src: "https://www.aquariadise.com/wp-content/uploads/2022/07/Most-Beautiful-Fish-1024x684.webp", title: 'Image 3', description: 'Description for Image 3' },
-          { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShzze_7p7CSiTBppyHvWchn8vF6FM0t7FMuA&usqp=CAU", title: 'Image 4', description: 'Description for Image 4' }
+          { src:"https://cf.ltkcdn.net/feng-shui/images/std/291786-800x533-symbolism-koi-fish-feng-shui.jpg", title: 'koi fish', description: 'Koi is a freshwater fish that widely lives in rivers, ponds, and marshes throughout Japan. It is an omnivorous fish and eats anything found in the water. They eat animal food such as shellfish like pond snails, crustaceans like crayfish, and insect larvae like dragonflies, as well as plant food such as algae.'  },         
+          { src:"https://img.staticmb.com/mbcontent/images/crop/uploads/2022/12/Feng-shui-fish-acquarium_0_1200.jpg", title: 'small fish', description: 'Fish are aquatic vertebrate animals that have gills but lack limbs with digits, like fingers or toes. Recall that vertebrates are animals with internal backbones. Most fish are streamlined in their general body form. The word fish is the same whether it is singular or plural—you can talk about one fish or ten fish.' },
+          { src: "https://www.aquariadise.com/wp-content/uploads/2022/07/Most-Beautiful-Fish-1024x684.webp", title: 'aqua blue fish', description: '"Many men go fishing all of their lives without knowing that it is not fish they are after." —Henry David Thoreau.' },
+          { src: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcShzze_7p7CSiTBppyHvWchn8vF6FM0t7FMuA&usqp=CAU", title: 'yellow fish', description: 'smallmouth yellowfish grow to 50 centimetres and 7 kilograms. Habitat: Larger fish tend to frequent large deep pools for most of the year and only migrate to nearby gravel beds in order to spawn. In rivers, all spawning takes place in riffles less than 30 centimetres deep, with a gravel substrate.' }
         ];
 
         $scope.showModal = false;
