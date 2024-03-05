@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="authApp">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User Authentication</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+    }
+    form {
+      margin: 20px auto;
+      width: 300px;
+    }
+    input {
+      display: block;
+      margin-bottom: 10px;
+      width: 100%;
+      padding: 8px;
+    }
+    button {
+      background-color: #4CAF50;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #1eccaf;
+    }
+    .error {
+      color: rgb(215, 228, 33);
+    }
+    .success {
+      color: rgb(56, 172, 56);
+    }
+  </style>
+</head>
+<body>
+  <div ng-controller="authController">
+    <form ng-submit="signUp()" ng-show="!loggedIn">
+      <h2>Sign Up</h2>
+      <input type="email" placeholder="Email" ng-model="signupData.email" required>
+      <input type="password" placeholder="Password" ng-model="signupData.password" required>
+      <button type="submit">Sign Up</button>
+    </form>
+    <form ng-submit="logIn()" ng-show="!loggedIn">
+      <h2>Log In</h2>
+      <input type="email" placeholder="Email" ng-model="loginData.email" required>
+      <input type="password" placeholder="Password" ng-model="loginData.password" required>
+      <button type="submit">Log In</button>
+    </form>
+    <div ng-show="loggedIn">
+      <h2>Welcome, {{ currentUser.email }}</h2>
+      <button ng-click="logOut()">Log Out</button>
+      <p>Personalized Content Here...</p>
+    </div>
+    <p class="error" ng-show="error">{{ error }}</p>
+    <p class="success" ng-show="successMsg">{{ successMsg }}</p>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script>
+    angular.module('authApp', [])
+    .controller('authController', function($scope) {
+      $scope.signupData = {};
+      $scope.loginData = {};
+      $scope.currentUser = null;
+      $scope.loggedIn = false;
+      $scope.error = '';
+      $scope.successMsg = '';
+
+      $scope.signUp = function() {
+        // Implement your signup logic here (e.g., sending data to server)
+        // For demonstration purposes, just showing success message
+        $scope.successMsg = 'Sign up successful!';
+      };
+
+      $scope.logIn = function() {
+        // Implement your login logic here (e.g., sending data to server)
+        // For demonstration purposes, just showing success message and setting currentUser
+        $scope.currentUser = $scope.loginData;
+        $scope.loggedIn = true;
+        $scope.successMsg = 'Logged in successfully!';
+      };
+
+      $scope.logOut = function() {
+        $scope.currentUser = null;
+        $scope.loggedIn = false;
+        $scope.successMsg = '';
+        $scope.error = '';
+        $scope.signupData = {};
+        $scope.loginData = {};
+      };
+    });
+  </script>
+</body>
+</html>
