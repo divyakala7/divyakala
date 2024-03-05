@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="TaskManagerApp">
+<head>
+  <meta charset="UTF-8">
+  <title>Task Manager</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: #f4f4f4;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 20px auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    h1 {
+      text-align: center;
+    }
+
+    .task-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      border-bottom: 1px solid #ddd;
+    }
+
+    .task-item input[type="text"] {
+      flex: 1;
+      margin-right: 10px;
+      padding: 5px;
+    }
+
+    .task-item button {
+      background-color: #2ff1a7;
+      color: #fcfbfb;
+      border: none;
+      padding: 5px 10px;
+      border-radius: 3px;
+      cursor: pointer;
+    }
+
+    .task-item button:hover {
+      background-color: #0bb9ab;
+    }
+  </style>
+</head>
+<body>
+  <div class="container" ng-controller="TaskController">
+    <h1>Task Manager</h1>
+    <div ng-repeat="task in tasks" class="task-item">
+      <input type="text" ng-model="task.name">
+      <button ng-click="removeTask($index)">Delete</button>
+    </div>
+    <button ng-click="addTask()">Add Task</button>
+  </div>
+
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+  <script>
+    angular.module('TaskManagerApp', [])
+      .controller('TaskController', function($scope) {
+        $scope.tasks = [];
+
+        $scope.addTask = function() {
+          $scope.tasks.push({ name: '' });
+        };
+
+        $scope.removeTask = function(index) {
+          $scope.tasks.splice(index, 1);
+        };
+      });
+  </script>
+</body>
+</html>
